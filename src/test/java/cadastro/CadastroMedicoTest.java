@@ -128,7 +128,7 @@ public class CadastroMedicoTest {
 		assertEquals("Atributo inválido", res);
 		
 		res = cadastroMedico.encontra("123asd");
-		assertEquals("", res);
+		assertEquals("Medico não cadastrado", res);
 	}
 	
 	@Test

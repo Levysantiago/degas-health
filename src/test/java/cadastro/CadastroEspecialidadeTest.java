@@ -10,9 +10,9 @@ public class CadastroEspecialidadeTest {
 		boolean res;
 		CadastroEspecialidade especialidade = new CadastroEspecialidade();
 		
-		especialidade.novo("111","Especialidade");
+		especialidade.novo("111","EspecialidadeExiste");
 		
-		res = especialidade.existe("123");
+		res = especialidade.existe("000");
 		assertEquals(false, res);
 		
 		res = especialidade.existe("");

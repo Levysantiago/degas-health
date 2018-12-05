@@ -3,7 +3,6 @@ package bancodados;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import modelo.Procedimento;
@@ -19,7 +18,6 @@ public class ProcedimentoDAOTest {
 	}
 	
 	@Test
-	@Ignore
 	public void inserirMaterialProcedimento() {
 		boolean res;
 		ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
@@ -28,7 +26,6 @@ public class ProcedimentoDAOTest {
 	}
 	
 	@Test
-	@Ignore
 	public void inserirEquipamentoProcedimento() {
 		boolean res;
 		ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
@@ -60,10 +57,10 @@ public class ProcedimentoDAOTest {
 		res = procedimentoDAO.alterarProcedimento("123456", "Descricao", "Ponte de Safena");
 		assertEquals(true, res);
 		
-		res = procedimentoDAO.alterarProcedimento("123456", "Custo", "20000");
+		res = procedimentoDAO.alterarProcedimento("123456", "Valor", "20000");
 		assertEquals(true, res);
 		
-		res = procedimentoDAO.alterarProcedimento("123456", "Custo", "50000");
+		res = procedimentoDAO.alterarProcedimento("123456", "Valor", "50000");
 		assertEquals(true, res);
 	}
 }

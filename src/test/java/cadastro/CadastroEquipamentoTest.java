@@ -10,9 +10,9 @@ public class CadastroEquipamentoTest {
 		boolean res;
 		CadastroEquipamento equipamento = new CadastroEquipamento();
 		
-		equipamento.novo("111","Equipamento","50000");
+		equipamento.novo("111","EquipamentoExiste","50000");
 		
-		res = equipamento.existe("123");
+		res = equipamento.existe("000");
 		assertEquals(false, res);
 		
 		res = equipamento.existe("");
