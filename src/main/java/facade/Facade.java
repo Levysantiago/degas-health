@@ -171,11 +171,11 @@ public class Facade {
 		return cadastroProcedimento.addEquipamento(codProcedimento, codEquipamento);
 	}
 	
-	public static String listMateriaisProcedimento(String codProcedimento) {
+	public String listMateriaisProcedimento(String codProcedimento) {
 		return cadastroProcedimento.listMateriais(codProcedimento);
 	}
 	
-	public static String listEquipamentosProcedimento(String codProcedimento) {
+	public String listEquipamentosProcedimento(String codProcedimento) {
 		return cadastroProcedimento.listEquipamentos(codProcedimento);
 	}
 	
