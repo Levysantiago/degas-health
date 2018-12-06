@@ -1,14 +1,15 @@
 package modelo;
 
 /**
- * This class represents an Assistant. This assistant has the following attributes:</br>
- * <b>nome</b> - The assistant's name</br>
- * <b>sex</b> - The assistant's gender</br>
- * <b>coren</b> - The assistant's COREN</br>
- * <b>nat</b> - The assistant's nationality</br>
- * <b>bthDate</b> - The assistant's bith date</br>
- * <b>admDate</b> - The assistant's admission date</br>
- * <b>gradDate</b> - The assistant's graduation date
+ * Essa classe representa um auxiliar que possui os seguintes atributos:</br>
+ * <b>id</b> - Id do auxiliar no banco de dados</br>
+ * <b>nome</b> - Nome do auxiliar</br>
+ * <b>sex</b> - Sexo do auxiliar</br>
+ * <b>coren</b> - Coren do auxiliar</br>
+ * <b>nat</b> - Nacionalidade do auxiliar</br>
+ * <b>bthDate</b> - Data de nascimento</br>
+ * <b>admDate</b> - Data de admissão</br>
+ * <b>gradDate</b> - Data de formatura
  *
  */
 public class Auxiliar{
@@ -17,14 +18,14 @@ public class Auxiliar{
 	private Long id;
 	
 	/**
-	 * This method sets all assistent's attributes.
-	 * @param nome - The assistent's name
-	 * @param sex - The assistent's gender
-	 * @param coren - The assistent's COREN
-	 * @param nat - The assistent's nationality
-	 * @param bthDate - The assistent's birth date
-	 * @param admDate - The assistent's admission date
-	 * @param gradDate - The assistent's graduation date
+	 * Este é o construtor parcial da classe, esta não define o valor do atributo id
+	 * @param nome - O nome do auxiliar
+	 * @param sex - Sexo do auxiliar
+	 * @param coren - Coren do auxiliar
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
 	 */
 	public Auxiliar(String nome, String sex, String coren, String nat, String bthDate, String admDate, String gradDate) {
 		this.nome = nome;
@@ -36,6 +37,17 @@ public class Auxiliar{
 		this.admDate = admDate;
 	}
 	
+	/**
+	 * Este é o construtor completo da classe, define o valor de todos os atributos
+	 * @param id - O id do auxiliar no banco de dados
+	 * @param nome - O nome do auxiliar
+	 * @param sex - Sexo do auxiliar
+	 * @param coren - Coren do auxiliar
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
+	 */
 	public Auxiliar(Long id, String nome, String sex, String coren, String nat, String bthDate, String admDate, String gradDate) {
 		this.id = id;
 		this.nome = nome;

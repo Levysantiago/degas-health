@@ -1,14 +1,15 @@
 package modelo;
 
 /**
- * This class represents a Doctor. This doctor has the following attributes:</br>
- * <b>nome</b> - The doctor's name</br>
- * <b>sex</b> - The doctor's gender</br>
- * <b>crm</b> - The doctor's CRM</br>
- * <b>nat</b> - The doctor's nationality</br>
- * <b>bthDate</b> - The doctor's bith date</br>
- * <b>admDate</b> - The doctor's admission date</br>
- * <b>gradDate</b> - The doctor's graduation date
+ * Essa classe representa um médico que possui os seguintes atributos:</br>
+ * <b>id</b> - Id do médico no banco de dados</br>
+ * <b>nome</b> - Nome do médico</br>
+ * <b>sex</b> - Sexo do médico</br>
+ * <b>crm</b> - CRM do médico</br>
+ * <b>nat</b> - Nacionalidade do médico</br>
+ * <b>bthDate</b> - Data de nascimento</br>
+ * <b>admDate</b> - Data de admissão</br>
+ * <b>gradDate</b> - Data de formatura
  *
  */
 
@@ -18,14 +19,14 @@ public class Medico {
 	private Long id;
 
 	/**
-	 * This method sets all doctor's attributes.
-	 * @param nome - The doctor's name
-	 * @param sex - The doctor's gender
-	 * @param crm - The doctor's CRM
-	 * @param nat - The doctor's nationality
-	 * @param bthDate - The doctor's birth date
-	 * @param admDate - The doctor's admission date
-	 * @param gradDate - The doctor's graduation date
+	 * Este é o construtor parcial da classe, esta não define o valor do atributo id
+	 * @param nome - O nome do médico
+	 * @param sex - Sexo do médico
+	 * @param crm - CRM do médico
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
 	 */
 	public Medico(String nome, String sex, String crm, String nat, String bthDate, String admDate, String gradDate) {
 		this.nome = nome;
@@ -37,6 +38,17 @@ public class Medico {
 		this.admDate = admDate;
 	}
 	
+	/**
+	 * Este é o construtor completo da classe, define o valor de todos os atributos
+	 * @param id - O id do médico no banco de dados
+	 * @param nome - O nome do médico
+	 * @param sex - Sexo do médico
+	 * @param crm - CRM do médico
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
+	 */
 	public Medico(Long id, String nome, String sex, String crm, String nat, String bthDate, String admDate, String gradDate) {
 		this.id = id;
 		this.nome = nome;

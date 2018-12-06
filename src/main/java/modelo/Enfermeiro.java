@@ -1,14 +1,15 @@
 package modelo;
 
 /**
- * This class represents a Nurse. This nurse has the following attributes:</br>
- * <b>nome</b> - The nurse's name</br>
- * <b>sex</b> - The nurse's gender</br>
- * <b>coren</b> - The nurse's COREN</br>
- * <b>nat</b> - The nurse's nationality</br>
- * <b>bthDate</b> - The nurse's bith date</br>
- * <b>admDate</b> - The nurse's admission date</br>
- * <b>gradDate</b> - The nurse's graduation date
+ * Essa classe representa um enfermeiro que possui os seguintes atributos:</br>
+ * <b>id</b> - Id do enfermeiro no banco de dados</br>
+ * <b>nome</b> - Nome do enfermeiro</br>
+ * <b>sex</b> - Sexo do enfermeiro</br>
+ * <b>coren</b> - Coren do enfermeiro</br>
+ * <b>nat</b> - Nacionalidade do enfermeiro</br>
+ * <b>bthDate</b> - Data de nascimento</br>
+ * <b>admDate</b> - Data de admissão</br>
+ * <b>gradDate</b> - Data de formatura
  *
  */
 public class Enfermeiro{
@@ -17,14 +18,14 @@ public class Enfermeiro{
 	private Long id;
 	
 	/**
-	 * This method sets all nurse's attributes.
-	 * @param nome - The nurse's name
-	 * @param sex - The nurse's gender
-	 * @param coren - The nurse's COREN
-	 * @param nat - The nurse's nationality
-	 * @param bthDate - The nurse's birth date
-	 * @param admDate - The nurse's admission date
-	 * @param gradDate - The nurse's graduation date
+	 * Este é o construtor parcial da classe, esta não define o valor do atributo id
+	 * @param nome - O nome do enfermeiro
+	 * @param sex - Sexo do enfermeiro
+	 * @param coren - Coren do enfermeiro
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
 	 */
 	public Enfermeiro(String nome, String sex, String coren, String nat, String bthDate, String admDate, String gradDate) {
 		this.nome = nome;
@@ -36,6 +37,17 @@ public class Enfermeiro{
 		this.admDate = admDate;
 	}
 	
+	/**
+	 * Este é o construtor completo da classe, define o valor de todos os atributos
+	 * @param id - O id do enfermeiro no banco de dados
+	 * @param nome - O nome do enfermeiro
+	 * @param sex - Sexo do enfermeiro
+	 * @param coren - Coren do enfermeiro
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
+	 */
 	public Enfermeiro(Long id, String nome, String sex, String coren, String nat, String bthDate, String admDate, String gradDate) {
 		this.id = id;
 		this.nome = nome;
