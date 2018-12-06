@@ -8,29 +8,32 @@ import modelo.Enfermeiro;
 import util.Helper;
 
 /**
- * This class aims to offer methods to allow the management of nurses ({@link Enfermeiro}). 
- * With this class it's possible to create, read and update nurses from a list.
- * This class extends the {@link CadastroFuncionario} that generalizes methods to be used
- * by another siblings classes like {@link CadastroMedico} and {@link CadastroAuxiliar}.
+ * Esta classe objetiva ofertar metodos para permitir o gerenciamento de enfermeiros ({@link Enfermeiro}).
+ * Com essa classe é possível criar, ler, e atualizar enfermeiros no banco de dados.
+ * Esta classe implementa a interface {@link Gerenciavel} que abstrai métodos essenciais.
  */
 public class CadastroEnfermeiro implements Gerenciavel<Enfermeiro>{
 	private EnfermeiroDAO enfermeiroDAO;
 	
+	/**
+	 * Este é o construtor da classe, ele simplesmente instancia um {@link EnfermeiroDAO} para
+	 * fazer requisições ao banco de dados.
+	 */
 	public CadastroEnfermeiro() {
 		enfermeiroDAO = new EnfermeiroDAO();
 	}
 	
 	/**
-	 * This method registers a new nurse by calling the 'novo' method from class's father {@link CadastroFuncionario}.
-	 * @param nome - The nurse's name
-	 * @param coren - The nurse's COREN
-	 * @param sex - The nurse's gender
-	 * @param nat - The nurse's nationality
-	 * @param bthDate - The nurse's birth date
-	 * @param gradDate - The nurse's graduation date
-	 * @param admDate - The nurse's admission date
+	 * Este método recebe e valida os atributos de um novo enfermeiro para então inserí-lo
+	 * @param nome - O nome do enfermeiro
+	 * @param sex - Sexo do enfermeiro
+	 * @param coren - Coren do enfermeiro
+	 * @param nat - Nationalidade
+	 * @param bthDate - Data de nascimento
+	 * @param admDate - Data de admissão
+	 * @param gradDate - Data de formatura
 	 * 
-	 * @return A message indicating an error or success to create a new nurse
+	 * @return Uma mensagem informando o sucesso ou não da inserção do enfermeiro no banco
 	 */
 	public String novo(String nome, String sex, String coren, String nat, String bthDate, String admDate, String gradDate) {
 		if(!coren.matches("[0-9]{2,6}")) {
@@ -68,20 +71,21 @@ public class CadastroEnfermeiro implements Gerenciavel<Enfermeiro>{
 		if(Helper.gradAfterAdm(gradDate, admDate))
 			return ("ERRO! Inconsistencia de datas: Formatura posterior a admissão!");
 		
-		// Instantiates a new Functionary
+		// Instantiates a new Nurse
 		Enfermeiro enfermeiro = new Enfermeiro(nome, sex, coren, nat, bthDate, admDate, gradDate);
 		
-		// After all tests, adds the nurse to the list
+		// After all tests, adds the nurse to the database
 		inserir(enfermeiro);
 		
 		return "Enfermeiro inserido!";
 	}
 	
 	/**
-	 * This method finds a nurse in nurses list by calling the 'encontraFuncionario' method from class's father {@link CadastroFuncionario}.
-	 * @param atributo - The name or COREN of a nurse
-	 * @return A string containing all information of the nurse found.<br>
-	 * 		If the nurse wasn't found, the method returns ""
+	 * Este método faz uma requisição à classe DAO para encontrar um enfermeiro no banco de dados.
+	 * Este método é uma implementação método "encontra" da interface {@link Gerenciavel}.
+	 * @param atributo - O nome ou Coren do enfermeiro
+	 * @return Uma String contendo toda a informação do enfermeiro encontrado
+	 * 		Se o enfermeiro não foi encontrado, o método retorna "" (Uma String vazia)
 	 */
 	@Override
 	public String encontra(String atributo) {
@@ -106,11 +110,12 @@ public class CadastroEnfermeiro implements Gerenciavel<Enfermeiro>{
 	}
 	
 	/**
-	 * This method modify an existent nurse by calling the 'alteraFuncionario' method from class's father {@link CadastroFuncionario}.
-	 * @param coren - The nurse's COREN
-	 * @param atributo - A nurse's attribute (Nome, COREN, Sexo...)
-	 * @param valor - The value to subscribe the old attribute value
-	 * @return A message indicating an error or a success.
+	 * Este método faz uma requisição à classe DAO para alterar um registro do enfermeiro no banco de dados.
+	 * Ele implementa o método "altera" da interface {@link Gerenciavel}.
+	 * @param crm - O Coren do enfermeiro
+	 * @param atributo - O campo o qual o dado será alterado (Nome, Coren, Sexo...)
+	 * @param valor - O novo dado a sobrescrever o dado antigo
+	 * @return Uma mensagem indicando um erro ou sucesso ao realizar a alteração
 	 */
 	@Override
 	public String altera(String coren, String atributo, String valor) {
@@ -162,10 +167,11 @@ public class CadastroEnfermeiro implements Gerenciavel<Enfermeiro>{
 	}
 	
 	/**
-	 * This method checks if the functionary already exists
-	 * @param ident - The functionary's identification
-	 * @return <code>true</code>: If the functionary already exists<br>
-	 * 		   <code>false</code>: If the functionary don't exists yet
+	 * Este método realiza uma requisição à classe DAO para verificar no banco se um enfermeiro existe.
+	 * Ele é a implementação do método "existe" da interface {@link Gerenciavel}.
+	 * @param crm - O Coren do enfermeiro
+	 * @return <code>true</code>: Se o enfermeiro existe<br>
+	 * 		   <code>false</code>: Se o enfermeiro não existe
 	 */
 	@Override
 	public boolean existe(String coren) {
@@ -176,6 +182,10 @@ public class CadastroEnfermeiro implements Gerenciavel<Enfermeiro>{
 		return false;
 	}
 	
+	/**
+	 * Este método realiza uma requisição à classe DAO para inserir um novo enfermeiro no banco de dados.
+	 * @param enfermeiro - O novo enfermeiro a ser inserido ({@link Enfermeiro})
+	 */
 	@Override
 	public void inserir(Enfermeiro enfermeiro) {
 		enfermeiroDAO.inserirEnfermeiro(enfermeiro);

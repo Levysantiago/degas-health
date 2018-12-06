@@ -4,13 +4,29 @@ import bancodados.EspecialidadeDAO;
 import interfaces.Gerenciavel;
 import modelo.Especialidade;
 
+/**
+ * Esta classe objetiva ofertar metodos para permitir o gerenciamento de especialidades ({@link Especialidade}).
+ * Com essa classe é possível criar, ler, e atualizar especialidades no banco de dados.
+ * Esta classe implementa a interface {@link Gerenciavel} que abstrai métodos essenciais.
+ */
 public class CadastroEspecialidade implements Gerenciavel<Especialidade>{
 private EspecialidadeDAO especialidadeDAO;
 	
+	/**
+	 * Este é o construtor da classe, ele simplesmente instancia um {@link EspecialidadeDAO} para
+	 * fazer requisições ao banco de dados.
+	 */
 	public CadastroEspecialidade(){
 		especialidadeDAO = new EspecialidadeDAO();
 	}
 	
+	/**
+	 * Este método recebe e valida os atributos de uma nova especialidade para então inserí-la
+	 * @param codigo - O código da especialidade
+	 * @param descricao - A descrição desta
+	 * 
+	 * @return Uma mensagem informando o sucesso ou não da inserção da especialidade no banco
+	 */
 	public String novo(String codigo, String descricao){
 		if(!descricao.matches("([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ]+[ ]*)+")) {
 			return "Campo Descricao inválido";
@@ -30,6 +46,13 @@ private EspecialidadeDAO especialidadeDAO;
 		return "Especialidade Registrada com sucesso";
 	}
 	
+	/**
+	 * Este método faz uma requisição à classe DAO para encontrar uma especialidade no banco de dados.
+	 * Este método é uma implementação método "encontra" da interface {@link Gerenciavel}.
+	 * @param atributo - A descrição da especialidade
+	 * @return Uma String contendo toda a informação da especialidade encontrada
+	 * 		Se a especialidade não foi encontrada, o método retorna "" (Uma String vazia)
+	 */
 	@Override
 	public String encontra(String atributo) {
 		if(atributo.matches("[ ]*")) {
@@ -50,6 +73,14 @@ private EspecialidadeDAO especialidadeDAO;
 		}
 	}
 	
+	/**
+	 * Este método faz uma requisição à classe DAO para alterar um registro da especialidade no banco de dados.
+	 * Ele implementa o método "altera" da interface {@link Gerenciavel}.
+	 * @param codigo - O codigo da especialidade
+	 * @param atributo - O campo o qual o dado será alterado (Descrição...)
+	 * @param valor - O novo dado a sobrescrever o dado antigo
+	 * @return Uma mensagem indicando um erro ou sucesso ao realizar a alteração
+	 */
 	@Override
 	public String altera(String codigo, String atributo, String valor) {
 		boolean altera = false;
@@ -76,7 +107,14 @@ private EspecialidadeDAO especialidadeDAO;
 		}
 		return "";
 	}
-
+	
+	/**
+	 * Este método realiza uma requisição à classe DAO para verificar no banco se uma especialidade existe.
+	 * Ele é a implementação do método "existe" da interface {@link Gerenciavel}.
+	 * @param codigo - O código da especialidade
+	 * @return <code>true</code>: Se a especialidade existe<br>
+	 * 		   <code>false</code>: Se a especialidade não existe
+	 */
 	@Override
 	public boolean existe(String codigo) {
 		Especialidade especialidade = especialidadeDAO.selecionarEspecialidadeCodigo(codigo);
@@ -86,6 +124,21 @@ private EspecialidadeDAO especialidadeDAO;
 		return false;
 	}
 	
+	/**
+	 * Este método realiza uma requisição à classe DAO para inserir uma nova especialidade no banco de dados.
+	 * @param especialidade - A nova especialidade a ser inserida ({@link Especialidade})
+	 */
+	@Override
+	public void inserir(Especialidade especialidade) {
+		especialidadeDAO.inserirEspecialidade(especialidade);
+	}
+	
+	/**
+	 * Este método faz uma requisição à classe DAO para verificar se alguma descrição já existe no banco.
+	 * @param descricao - A descrição da especialidade
+	 * @return <code>true</code> Caso esta descrição exista no banco.<br>
+	 * 			<code>false</code> Caso esta descrição não exista no banco.
+	 */
 	public boolean descricaoExiste(String descricao) {
 		Especialidade especialidade = especialidadeDAO.selecionarEspecialidadeDescricao(descricao);
 		if(especialidade != null) {
@@ -94,8 +147,4 @@ private EspecialidadeDAO especialidadeDAO;
 		return false;
 	}
 	
-	@Override
-	public void inserir(Especialidade especialidade) {
-		especialidadeDAO.inserirEspecialidade(especialidade);
-	}
 }
