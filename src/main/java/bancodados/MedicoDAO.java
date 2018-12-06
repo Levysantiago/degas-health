@@ -7,7 +7,18 @@ import java.sql.SQLException;
 
 import modelo.Medico;
 
+/**
+ * Esta classe é responsável por fazer comunicações com o banco de dados para adicionar, editar e listar
+ * médicos.
+ */
 public class MedicoDAO {
+	
+	/**
+	 * Este método é responsável por inserir um novo médico no banco de dados.
+	 * @param medico - O novo médico a ser cadastrado
+	 * @return <code>true</code> Se o cadastro foi realizado com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean inserirMedico(Medico medico){
     	String query = "{CALL inserirMedico(?,?,?,?,?,?,?)}";
     	
@@ -36,6 +47,12 @@ public class MedicoDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um médico no banco de dados
+	 * a partir do CRM.
+	 * @param crm - O CRM do médico
+	 * @return O objeto {@link Medico} instanciado
+	 */
 	public Medico selecionarMedicoCrm(String crm) {
     	String query = "{CALL selectionarMedicoCrm(?)}";
     	Medico medico = null;
@@ -66,6 +83,12 @@ public class MedicoDAO {
 		return medico;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um médico no banco de dados
+	 * a partir do Nome.
+	 * @param nome - O nome do médico
+	 * @return O objeto {@link Medico} instanciado
+	 */
 	public Medico selecionarMedicoNome(String nome) {
     	String query = "{CALL selectionarMedicoNome(?)}";
     	Medico medico = null;
@@ -95,6 +118,15 @@ public class MedicoDAO {
 		return medico;
     }
 	
+	/**
+	 * Este método é responsável por realizar uma requisição de alteração de um dado
+	 * de um médico.
+	 * @param crm - O CRM do médico
+	 * @param campo - O campo onde será realizada a alteração
+	 * @param valor - O novo valor do dado
+	 * @return <code>true</code> Se a alteração foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean alterarMedico(String crm, String campo, String valor) {
     	PreparedStatement stmt;
     	String query = "UPDATE Medico SET "+ campo +" = '"+valor+"' WHERE Crm = '"+crm+"';";

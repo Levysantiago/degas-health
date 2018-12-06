@@ -7,7 +7,18 @@ import java.sql.SQLException;
 
 import modelo.Material;
 
+/**
+ * Esta classe é responsável por fazer comunicações com o banco de dados para adicionar, editar e listar
+ * materiais.
+ */
 public class MaterialDAO {
+	
+	/**
+	 * Este método é responsável por inserir um novo material no banco de dados.
+	 * @param material - O novo material a ser cadastrado
+	 * @return <code>true</code> Se o cadastro foi realizado com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean inserirMaterial(Material material){
     	String query = "{CALL inserirMaterial(?,?,?)}";
     	
@@ -33,6 +44,12 @@ public class MaterialDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um material no banco de dados
+	 * a partir do Código.
+	 * @param codigo - O codigo do material
+	 * @return O objeto {@link Material} instanciado
+	 */
 	public Material selecionarMaterialCodigo(String codigo) {
     	String query = "{CALL selectionarMaterialCodigo(?)}";
     	Material material = null;
@@ -60,6 +77,12 @@ public class MaterialDAO {
 		return material;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um material no banco de dados
+	 * a partir da Descrição.
+	 * @param codigo - O codigo do material
+	 * @return O objeto {@link Material} instanciado
+	 */
 	public Material selecionarMaterialDescricao(String descricao) {
     	String query = "{CALL selectionarMaterialDescricao(?)}";
     	Material material = null;
@@ -88,6 +111,15 @@ public class MaterialDAO {
 		return material;
     }
 	
+	/**
+	 * Este método é responsável por realizar uma requisição de alteração de um dado
+	 * de um material.
+	 * @param codigo - O Código do material
+	 * @param campo - O campo onde será realizada a alteração
+	 * @param valor - O novo valor do dado
+	 * @return <code>true</code> Se a alteração foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean alterarMaterial(String codigo, String campo, String valor) {
     	PreparedStatement stmt;
     	String query;

@@ -7,7 +7,17 @@ import java.sql.SQLException;
 
 import modelo.Especialidade;
 
+/**
+ * Esta classe é responsável por fazer comunicações com o banco de dados para adicionar, editar e listar
+ * especialidades.
+ */
 public class EspecialidadeDAO {
+	/**
+	 * Este método é responsável por inserir uma nova especialidade no banco de dados.
+	 * @param especialidade - A nova especialidade a ser cadastrada
+	 * @return <code>true</code> Se o cadastro foi realizado com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean inserirEspecialidade(Especialidade especialidade){
     	String query = "{CALL inserirEspecialidade(?,?)}";
     	
@@ -32,6 +42,12 @@ public class EspecialidadeDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por selecionar uma especialidade no banco de dados
+	 * a partir do Código.
+	 * @param codigo - O Código da especialidade
+	 * @return O objeto {@link Especialidade} instanciado
+	 */
 	public Especialidade selecionarEspecialidadeCodigo(String codigo) {
     	String query = "{CALL selectionarEspecialidadeCodigo(?)}";
     	Especialidade especialidade = null;
@@ -58,6 +74,12 @@ public class EspecialidadeDAO {
 		return especialidade;
     }
 	
+	/**
+	 * Este método é responsável por selecionar uma especialidade no banco de dados
+	 * a partir da Descrição.
+	 * @param descrição - A Descrição da especialidade
+	 * @return O objeto {@link Especialidade} instanciado
+	 */
 	public Especialidade selecionarEspecialidadeDescricao(String descricao) {
     	String query = "{CALL selectionarEspecialidadeDescricao(?)}";
     	Especialidade especialidade = null;
@@ -85,6 +107,15 @@ public class EspecialidadeDAO {
 		return especialidade;
     }
 	
+	/**
+	 * Este método é responsável por realizar uma requisição de alteração de um dado
+	 * de uma especialidade.
+	 * @param codigo - O Código da especialidade
+	 * @param campo - O campo onde será realizada a alteração
+	 * @param valor - O novo valor do dado
+	 * @return <code>true</code> Se a alteração foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean alterarEspecialidade(String codigo, String campo, String valor) {
     	PreparedStatement stmt;
     	String query = "UPDATE Especialidade SET "+ campo +" = '"+valor+"' WHERE Codigo = '"+codigo+"';";

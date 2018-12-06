@@ -8,7 +8,18 @@ import java.sql.SQLException;
 import modelo.Equipamento;
 import modelo.Tombo;
 
+/**
+ * Esta classe é responsável por fazer comunicações com o banco de dados para adicionar, editar e listar
+ * equipamentos.
+ */
 public class EquipamentoDAO {
+	
+	/**
+	 * Este método é responsável por inserir um novo equipamento no banco de dados.
+	 * @param equipamento - O novo equipamento a ser cadastrado
+	 * @return <code>true</code> Se o cadastro foi realizado com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean inserirEquipamento(Equipamento equipamento){
     	String query = "{CALL inserirEquipamento(?,?,?)}";
     	
@@ -34,6 +45,12 @@ public class EquipamentoDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um equipamento no banco de dados
+	 * a partir do Código.
+	 * @param codigo - O código do equipamento
+	 * @return O objeto {@link Equipamento} instanciado
+	 */
 	public Equipamento selecionarEquipamentoCodigo(String codigo) {
     	String query = "{CALL selectionarEquipamentoCodigo(?)}";
     	Equipamento equipamento = null;
@@ -62,6 +79,12 @@ public class EquipamentoDAO {
 		return equipamento;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um equipamento no banco de dados
+	 * a partir da Descrição.
+	 * @param descrição - A descrição do equipamento
+	 * @return O objeto {@link Equipamento} instanciado
+	 */
 	public Equipamento selecionarEquipamentoDescricao(String descricao) {
     	String query = "{CALL selectionarEquipamentoDescricao(?)}";
     	Equipamento equipamento = null;
@@ -90,6 +113,15 @@ public class EquipamentoDAO {
 		return equipamento;
     }
 	
+	/**
+	 * Este método é responsável por realizar uma requisição de alteração de um dado
+	 * de um equipamento.
+	 * @param código - O Código do equipamento
+	 * @param campo - O campo onde será realizada a alteração
+	 * @param valor - O novo valor do dado
+	 * @return <code>true</code> Se a alteração foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean alterarEquipamento(String codigo, String campo, String valor) {
     	PreparedStatement stmt;
     	String query;
@@ -115,6 +147,13 @@ public class EquipamentoDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por cadastrar um tombo em um equipamento no
+	 * banco de dados.
+	 * @param tombo - O objeto Tombo contendo o código do equipamento e do tombo
+	 * @return <code>true</code> Se o cadastro foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean tombaEquipamento(Tombo tombo) {
 		Equipamento equipamento = this.selecionarEquipamentoCodigo(tombo.getCodigoEquipamento());
 		String query = "{CALL inserirTombo(?, ?)}";
@@ -140,6 +179,13 @@ public class EquipamentoDAO {
     	return true;
 	}
 	
+	/**
+	 * Este método é responsável por verificar se um tombo existe em
+	 * determinado equipamento.
+	 * @param tombo - O tombo a ser verificado
+	 * @return <code>true</code> Se o tombo existe<br>
+	 * 			<code>false</code> Se o tombo não existe
+	 */
 	public boolean existeTombo(Tombo tombo) {
 		Equipamento equipamento = this.selecionarEquipamentoCodigo(tombo.getCodigoEquipamento());
 		String query = "{CALL selectionarEquipamentoTombo(?, ?)}";

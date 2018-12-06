@@ -7,7 +7,17 @@ import java.sql.SQLException;
 
 import modelo.Enfermeiro;
 
+/**
+ * Esta classe é responsável por fazer comunicações com o banco de dados para adicionar, editar e listar
+ * enfermeiros.
+ */
 public class EnfermeiroDAO {
+	/**
+	 * Este método é responsável por inserir um novo enfermeiro no banco de dados.
+	 * @param enfermeiro - O novo enfermeiro a ser cadastrado
+	 * @return <code>true</code> Se o cadastro foi realizado com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean inserirEnfermeiro(Enfermeiro enfermeiro){
     	String query = "{CALL inserirEnfermeiro(?,?,?,?,?,?,?)}";
     	
@@ -36,6 +46,12 @@ public class EnfermeiroDAO {
     	return true;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um enfermeiro no banco de dados
+	 * a partir do Coren.
+	 * @param coren - O Coren do enfermeiro
+	 * @return O objeto {@link Enfermeiro} instanciado
+	 */
 	public Enfermeiro selecionarEnfermeiroCoren(String coren) {
     	String query = "{CALL selectionarEnfermeiroCoren(?)}";
     	Enfermeiro enfermeiro = null;
@@ -66,6 +82,12 @@ public class EnfermeiroDAO {
 		return enfermeiro;
     }
 	
+	/**
+	 * Este método é responsável por selecionar um enfermeiro no banco de dados
+	 * a partir do Nome.
+	 * @param nome - O Nome do enfermeiro
+	 * @return O objeto {@link Enfermeiro} instanciado
+	 */
 	public Enfermeiro selecionarEnfermeiroNome(String nome) {
     	String query = "{CALL selectionarEnfermeiroNome(?)}";
     	Enfermeiro enfermeiro = null;
@@ -97,6 +119,15 @@ public class EnfermeiroDAO {
 		return enfermeiro;
     }
 	
+	/**
+	 * Este método é responsável por realizar uma requisição de alteração de um dado
+	 * de um enfermeiro.
+	 * @param coren - O Coren do enfermeiro
+	 * @param campo - O campo onde será realizada a alteração
+	 * @param valor - O novo valor do dado
+	 * @return <code>true</code> Se a alteração foi realizada com sucesso<br>
+	 * 			<code>false</code> Se houve algum problema
+	 */
 	public boolean alterarEnfermeiro(String coren, String campo, String valor) {
     	PreparedStatement stmt;
     	String query = "UPDATE Enfermeiro SET "+ campo +" = '"+valor+"' WHERE Coren = '"+coren+"';";
